@@ -18,5 +18,3 @@ if ($sqlinsert->rowCount() > 0) {
 } else {
     echo json_encode(array("status" => "Failed"));
 }
-
-//http://flutterapi.test/notes/add.php?note_title=?&notes_content=?.com&id=?
