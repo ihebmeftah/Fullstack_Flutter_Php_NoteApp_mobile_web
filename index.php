@@ -1,33 +1,37 @@
 <?php
-echo"Index <br>";
+echo "Index <br>";
 include "connect.php";
 
 define('mb', 1048576);
 function upload($fileup)
 {
     global $msgerror;
-    $imgname = $_FILES[$fileup]['name'];
+    $imgname = $_FILES[$fileup]['name']; // img name 
     $imgtmp = $_FILES[$fileup]['tmp_name'];
     $imgsize = $_FILES[$fileup]['size'];
-    $extension = array('jpg', 'png', 'gif');
+    $extension = array('jpg', 'jpeg', 'png', 'gif');
     $strtoarray = explode('.', $imgname);
     $ext = strtolower(end($strtoarray));
 
     if (!empty($imgname) && !in_array($ext, $extension)) {
         $msgerror[] = 'may be extension error';
     }
+    //*** */
     if ($imgsize > 2 * mb) {
         $msgerror[] = 'may be size error';
-
-        if (empty($msgerror)) {
-            move_uploaded_file($imgtmp, "upload/".$imgname);
-        } else {
-            echo '<pre>';
-            print_r($msgerror);
-            echo '</pre>';
-        }
     }
-    echo'done';
+    //*** */
+
+    if (empty($msgerror)) {
+        echo 'uploading file in path';
+
+        move_uploaded_file($imgtmp, "upload/" . $imgname);
+    } else {
+        echo '<pre>';
+        print_r($msgerror);
+        echo '</pre>';
+    }
+
 }
 
 upload('file');
@@ -68,4 +72,3 @@ $reqAdd = $dbconnect->prepare("DELETE FROM `users` WHERE id = 4 "); // SQL STATE
 $reqAdd->execute();// EXECUTE SQL STATEMENT USE 'execute()' METHODE
 echo json_encode($showUser);
 */
-?>
