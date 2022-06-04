@@ -1,11 +1,13 @@
 <?php
 include "../connect.php ";
+include "../function.php ";
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
-header("Access-Control-Max-Age: 3600");$usermail = $_REQUEST['usermail'];
-$userpassword = $_REQUEST['userpassword'];
+header("Access-Control-Max-Age: 3600");
+$usermail = secureReq('usermail') ;
+$userpassword = secureReq('userpassword') ;
 //****************** */
 
 $sqlinsert = $dbconnect->prepare("SELECT * FROM users WHERE usermail = ? AND userpassword = ? ");
