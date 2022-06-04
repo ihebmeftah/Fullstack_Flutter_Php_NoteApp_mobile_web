@@ -10,7 +10,7 @@ function secureReq($reqname)
 function upload($fileup)
 {
     global $msgerror;
-    $imgname = $_FILES[$fileup]['name']; // img name 
+    $imgname = rand(1000,10000).$_FILES[$fileup]['name']; // img name 
     $imgtmp = $_FILES[$fileup]['tmp_name'];
     $imgsize = $_FILES[$fileup]['size'];
     $extension = array('jpg', 'jpeg', 'png', 'gif');
@@ -28,11 +28,17 @@ function upload($fileup)
 
     if (empty($msgerror)) {
         echo 'uploading file in path';
-
-        move_uploaded_file($imgtmp, "upload/" . $imgname);
+        move_uploaded_file($imgtmp, "../upload/" . $imgname);
+    
+        return $imgname; 
     } else {
-        echo '<pre>';
-        print_r($msgerror);
-        echo '</pre>';
+        echo 'FAIL';
+        
+    }
+}
+
+function deletefile($path , $name){
+    if(file_exists($path ."/" .$name)){
+unlink($path ."/" .$name);
     }
 }

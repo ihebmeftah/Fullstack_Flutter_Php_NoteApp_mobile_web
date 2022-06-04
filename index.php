@@ -4,7 +4,6 @@ include "connect.php";
 include "./function.php";
 
 
-upload('file');
 /*
 $requet = $dbconnect->prepare("SELECT * FROM Users  "); // SQL STATEMENT USE 'prepare()' METHODE
 $requet->execute();// EXECUTE SQL STATEMENT USE 'execute()' METHODE
